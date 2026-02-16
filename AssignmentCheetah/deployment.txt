@@ -1,0 +1,3 @@
+Frontend URL: [Your Vercel URL after deployment]
+Backend API URL: [Your Render/Railway URL after deployment]
+MongoDB Atlas Connection: [Your MongoDB Atlas connection string]
