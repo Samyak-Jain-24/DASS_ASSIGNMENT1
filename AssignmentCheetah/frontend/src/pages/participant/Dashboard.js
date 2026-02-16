@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getMyRegistrations } from '../../services/apiService';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
+import CalendarExport from '../../components/CalendarExport';
 import './Dashboard.css';
 
 const ParticipantDashboard = () => {
@@ -17,6 +18,7 @@ const ParticipantDashboard = () => {
   const [activeTab, setActiveTab] = useState('upcoming');
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [showTicketModal, setShowTicketModal] = useState(false);
+  const [selectedForExport, setSelectedForExport] = useState([]);
 
   useEffect(() => {
     fetchRegistrations();
@@ -42,6 +44,24 @@ const ParticipantDashboard = () => {
   const viewTicket = (registration) => {
     setSelectedTicket(registration);
     setShowTicketModal(true);
+  };
+
+  const toggleExportSelection = (eventId) => {
+    setSelectedForExport((prev) =>
+      prev.includes(eventId) ? prev.filter((id) => id !== eventId) : [...prev, eventId]
+    );
+  };
+
+  const selectAllForExport = () => {
+    const currentEvents = registrations[activeTab]
+      .filter((r) => r.event?._id)
+      .map((r) => r.event._id);
+    const allSelected = currentEvents.every((id) => selectedForExport.includes(id));
+    if (allSelected) {
+      setSelectedForExport((prev) => prev.filter((id) => !currentEvents.includes(id)));
+    } else {
+      setSelectedForExport((prev) => [...new Set([...prev, ...currentEvents])]);
+    }
   };
 
   if (loading) {
@@ -108,6 +128,14 @@ const ParticipantDashboard = () => {
           </button>
         </div>
 
+        {/* Batch Calendar Export */}
+        {registrations[activeTab].length > 0 && (
+          <CalendarExport
+            mode="batch"
+            eventIds={selectedForExport}
+          />
+        )}
+
         <div className="registrations-list">
           {registrations[activeTab].length === 0 ? (
             <div className="no-data">
@@ -119,7 +147,24 @@ const ParticipantDashboard = () => {
               )}
             </div>
           ) : (
-            registrations[activeTab].map((registration) => (
+            <>
+              {registrations[activeTab].length > 1 && (
+                <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <input
+                    type="checkbox"
+                    checked={
+                      registrations[activeTab].filter(r => r.event?._id).length > 0 &&
+                      registrations[activeTab].filter(r => r.event?._id).every(r => selectedForExport.includes(r.event._id))
+                    }
+                    onChange={selectAllForExport}
+                    id="select-all-export"
+                  />
+                  <label htmlFor="select-all-export" style={{ fontSize: '13px', color: '#555', cursor: 'pointer' }}>
+                    Select all for calendar export
+                  </label>
+                </div>
+              )}
+              {registrations[activeTab].map((registration) => (
               <div key={registration._id} className="registration-card">
                 <div className="registration-info">
                   <h3>{registration.event?.eventName}</h3>
@@ -156,6 +201,19 @@ const ParticipantDashboard = () => {
                   </p>
                 </div>
                 <div className="registration-actions">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
+                    <input
+                      type="checkbox"
+                      checked={selectedForExport.includes(registration.event?._id)}
+                      onChange={() => toggleExportSelection(registration.event?._id)}
+                      title="Select for batch export"
+                    />
+                    <CalendarExport
+                      mode="inline"
+                      eventId={registration.event?._id}
+                      eventName={registration.event?.eventName || 'event'}
+                    />
+                  </div>
                   <button
                     onClick={() => viewTicket(registration)}
                     className="btn btn-primary btn-sm"
@@ -170,7 +228,8 @@ const ParticipantDashboard = () => {
                   </Link>
                 </div>
               </div>
-            ))
+            ))}
+            </>
           )}
         </div>
       </div>

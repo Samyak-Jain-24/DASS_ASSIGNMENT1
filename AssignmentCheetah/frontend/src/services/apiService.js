@@ -222,3 +222,37 @@ export const togglePinMessage = (eventId, messageId) => {
 export const toggleMessageReaction = (eventId, messageId, data) => {
   return api.put(`/forum/${eventId}/message/${messageId}/react`, data);
 };
+
+// ===== Notification APIs =====
+export const getNotifications = (unreadOnly) => {
+  return api.get('/notifications', { params: { unreadOnly } });
+};
+
+export const markNotificationRead = (id) => {
+  return api.put(`/notifications/${id}/read`);
+};
+
+export const markAllNotificationsRead = () => {
+  return api.put('/notifications/read-all');
+};
+
+// ===== Calendar Integration APIs =====
+export const exportCalendarEvent = (eventId, reminder = 30) => {
+  return api.get(`/calendar/export/${eventId}?reminder=${reminder}`, { responseType: 'blob' });
+};
+
+export const exportCalendarBatch = (eventIds, reminder = 30) => {
+  return api.post('/calendar/export-batch', { eventIds, reminder }, { responseType: 'blob' });
+};
+
+export const getGoogleCalendarLink = (eventId) => {
+  return api.get(`/calendar/google/${eventId}`);
+};
+
+export const getOutlookCalendarLink = (eventId) => {
+  return api.get(`/calendar/outlook/${eventId}`);
+};
+
+export const getCalendarEventInfo = (eventId) => {
+  return api.get(`/calendar/event-info/${eventId}`);
+};

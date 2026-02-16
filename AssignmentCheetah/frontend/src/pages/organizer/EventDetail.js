@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getEventById, getEventRegistrations, updateEvent } from '../../services/apiService';
 import { toast } from 'react-toastify';
+import DiscussionForum from '../../components/DiscussionForum';
 
 const OrganizerEventDetail = () => {
   const { id } = useParams();
@@ -231,6 +232,9 @@ const OrganizerEventDetail = () => {
               </div>
             )}
           </div>
+
+          {/* Discussion Forum */}
+          <DiscussionForum eventId={id} />
         </div>
       </div>
     </div>

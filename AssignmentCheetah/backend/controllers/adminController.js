@@ -139,12 +139,19 @@ const deleteOrganizer = async (req, res) => {
   }
 };
 
-// @desc    Get all password reset requests
+// @desc    Get all password reset requests (all statuses with history)
 // @route   GET /api/admin/password-resets
 // @access  Private (Admin)
 const getPasswordResets = async (req, res) => {
   try {
-    const requests = await PasswordReset.find({ status: 'Pending' }).sort({ requestedAt: -1 });
+    const { status } = req.query;
+
+    let query = {};
+    if (status && status !== 'All') {
+      query.status = status;
+    }
+
+    const requests = await PasswordReset.find(query).sort({ requestedAt: -1 });
 
     res.json({
       count: requests.length,
@@ -157,7 +164,7 @@ const getPasswordResets = async (req, res) => {
   }
 };
 
-// @desc    Approve password reset
+// @desc    Approve password reset (auto-generates password)
 // @route   PUT /api/admin/password-resets/:id/approve
 // @access  Private (Admin)
 const approvePasswordReset = async (req, res) => {
@@ -176,13 +183,10 @@ const approvePasswordReset = async (req, res) => {
       });
     }
 
-    const { newPassword } = req.body;
+    const { adminComment } = req.body;
 
-    if (!newPassword) {
-      return res.status(400).json({
-        message: 'New password is required',
-      });
-    }
+    // Auto-generate a secure password
+    const generatedPassword = crypto.randomBytes(6).toString('hex'); // 12 chars
 
     // Update user password based on type
     let user;
@@ -199,14 +203,19 @@ const approvePasswordReset = async (req, res) => {
       });
     }
 
-    user.password = newPassword;
+    user.password = generatedPassword;
     await user.save();
 
     resetRequest.status = 'Approved';
+    resetRequest.adminComment = adminComment || '';
+    resetRequest.generatedPassword = generatedPassword;
+    resetRequest.processedBy = req.user._id;
+    resetRequest.processedAt = new Date();
     await resetRequest.save();
 
     res.json({
-      message: 'Password reset approved and updated successfully',
+      message: 'Password reset approved. New password has been generated.',
+      generatedPassword,
     });
   } catch (error) {
     console.error('Approve password reset error:', error);
@@ -216,7 +225,7 @@ const approvePasswordReset = async (req, res) => {
   }
 };
 
-// @desc    Reject password reset
+// @desc    Reject password reset (with optional comment)
 // @route   PUT /api/admin/password-resets/:id/reject
 // @access  Private (Admin)
 const rejectPasswordReset = async (req, res) => {
@@ -229,7 +238,18 @@ const rejectPasswordReset = async (req, res) => {
       });
     }
 
+    if (resetRequest.status !== 'Pending') {
+      return res.status(400).json({
+        message: 'Request has already been processed',
+      });
+    }
+
+    const { adminComment } = req.body;
+
     resetRequest.status = 'Rejected';
+    resetRequest.adminComment = adminComment || '';
+    resetRequest.processedBy = req.user._id;
+    resetRequest.processedAt = new Date();
     await resetRequest.save();
 
     res.json({
@@ -247,7 +267,7 @@ const rejectPasswordReset = async (req, res) => {
 // @access  Public
 const requestPasswordReset = async (req, res) => {
   try {
-    const { email, userType } = req.body;
+    const { email, userType, reason } = req.body;
 
     // Check if user exists
     let user;
@@ -265,15 +285,36 @@ const requestPasswordReset = async (req, res) => {
       });
     }
 
+    // Check for existing pending request
+    const existingPending = await PasswordReset.findOne({
+      email,
+      userType,
+      status: 'Pending',
+    });
+    if (existingPending) {
+      return res.status(400).json({
+        message: 'You already have a pending password reset request. Please wait for admin to process it.',
+      });
+    }
+
     // Generate token
     const token = crypto.randomBytes(32).toString('hex');
 
-    // Create reset request
-    await PasswordReset.create({
+    // Build reset request with organizer details
+    const resetData = {
       email,
       userType,
       token,
-    });
+      reason: reason || '',
+    };
+
+    if (userType === 'organizer') {
+      resetData.organizerName = user.organizerName || '';
+      resetData.category = user.category || '';
+    }
+
+    // Create reset request
+    await PasswordReset.create(resetData);
 
     res.json({
       message: 'Password reset request submitted. Please wait for admin approval.',

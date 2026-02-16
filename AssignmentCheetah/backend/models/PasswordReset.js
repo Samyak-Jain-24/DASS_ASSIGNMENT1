@@ -11,6 +11,18 @@ const passwordResetSchema = new mongoose.Schema(
       enum: ['participant', 'organizer'],
       required: true,
     },
+    organizerName: {
+      type: String,
+      default: '',
+    },
+    category: {
+      type: String,
+      default: '',
+    },
+    reason: {
+      type: String,
+      default: '',
+    },
     token: {
       type: String,
       required: true,
@@ -19,6 +31,21 @@ const passwordResetSchema = new mongoose.Schema(
       type: String,
       enum: ['Pending', 'Approved', 'Rejected'],
       default: 'Pending',
+    },
+    adminComment: {
+      type: String,
+      default: '',
+    },
+    generatedPassword: {
+      type: String,
+      default: '',
+    },
+    processedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Admin',
+    },
+    processedAt: {
+      type: Date,
     },
     requestedAt: {
       type: Date,

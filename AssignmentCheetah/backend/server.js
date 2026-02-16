@@ -13,6 +13,9 @@ const organizerRoutes = require('./routes/organizerRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const merchandiseOrderRoutes = require('./routes/merchandiseOrderRoutes');
 const attendanceRoutes = require('./routes/attendanceRoutes');
+const forumRoutes = require('./routes/forumRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
+const calendarRoutes = require('./routes/calendarRoutes');
 
 // Initialize app
 const app = express();
@@ -41,6 +44,9 @@ app.use('/api/organizers', organizerRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/merchandise-orders', merchandiseOrderRoutes);
 app.use('/api/attendance', attendanceRoutes);
+app.use('/api/forum', forumRoutes);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/calendar', calendarRoutes);
 
 // Error handling
 app.use(notFound);
