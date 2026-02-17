@@ -224,16 +224,16 @@ export const toggleMessageReaction = (eventId, messageId, data) => {
 };
 
 // ===== Notification APIs =====
-export const getNotifications = (unreadOnly) => {
-  return api.get('/notifications', { params: { unreadOnly } });
+export const getNotifications = (unreadOnly, eventId) => {
+  return api.get('/notifications', { params: { unreadOnly, eventId } });
 };
 
 export const markNotificationRead = (id) => {
   return api.put(`/notifications/${id}/read`);
 };
 
-export const markAllNotificationsRead = () => {
-  return api.put('/notifications/read-all');
+export const markAllNotificationsRead = (eventId) => {
+  return api.put('/notifications/read-all', { eventId });
 };
 
 // ===== Calendar Integration APIs =====

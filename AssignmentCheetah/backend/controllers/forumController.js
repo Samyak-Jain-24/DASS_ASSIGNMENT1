@@ -94,6 +94,38 @@ const createForumNotifications = async ({ event, message, author, authorName, ty
           forumMessage: message._id,
         });
       }
+
+      // Also notify all registered participants about new forum messages
+      const registrations = await Registration.find({
+        event,
+        status: { $ne: 'Cancelled' },
+      }).select('participant');
+
+      const participantIds = registrations.map(r => r.participant.toString());
+
+      // Also check merchandise orders
+      const merchandiseOrders = await MerchandiseOrder.find({
+        event,
+        paymentStatus: { $in: ['Pending Approval', 'Approved'] },
+      }).select('participant');
+      merchandiseOrders.forEach(o => {
+        const pid = o.participant.toString();
+        if (!participantIds.includes(pid)) participantIds.push(pid);
+      });
+
+      for (const pid of participantIds) {
+        if (pid !== author.toString()) {
+          notifications.push({
+            recipient: pid,
+            recipientModel: 'Participant',
+            type: 'forum_reply',
+            title: `💬 New message in "${eventDoc.eventName}" forum`,
+            message: `${authorName}: ${message.content.substring(0, 100)}${message.content.length > 100 ? '...' : ''}`,
+            event,
+            forumMessage: message._id,
+          });
+        }
+      }
     }
 
     if (notifications.length > 0) {

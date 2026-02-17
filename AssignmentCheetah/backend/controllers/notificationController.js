@@ -6,7 +6,7 @@ const Notification = require('../models/Notification');
 const getNotifications = async (req, res) => {
   try {
     const recipientModel = req.userRole === 'organizer' ? 'Organizer' : 'Participant';
-    const { unreadOnly } = req.query;
+    const { unreadOnly, eventId } = req.query;
 
     const query = {
       recipient: req.user._id,
@@ -15,17 +15,24 @@ const getNotifications = async (req, res) => {
     if (unreadOnly === 'true') {
       query.isRead = false;
     }
+    if (eventId) {
+      query.event = eventId;
+    }
 
     const notifications = await Notification.find(query)
       .sort({ createdAt: -1 })
       .limit(50)
       .populate('event', 'eventName');
 
-    const unreadCount = await Notification.countDocuments({
+    const unreadCountQuery = {
       recipient: req.user._id,
       recipientModel,
       isRead: false,
-    });
+    };
+    if (eventId) {
+      unreadCountQuery.event = eventId;
+    }
+    const unreadCount = await Notification.countDocuments(unreadCountQuery);
 
     res.json({ notifications, unreadCount });
   } catch (error) {
@@ -63,11 +70,14 @@ const markAsRead = async (req, res) => {
 const markAllAsRead = async (req, res) => {
   try {
     const recipientModel = req.userRole === 'organizer' ? 'Organizer' : 'Participant';
+    const { eventId } = req.body;
 
-    await Notification.updateMany(
-      { recipient: req.user._id, recipientModel, isRead: false },
-      { isRead: true }
-    );
+    const filter = { recipient: req.user._id, recipientModel, isRead: false };
+    if (eventId) {
+      filter.event = eventId;
+    }
+
+    await Notification.updateMany(filter, { isRead: true });
 
     res.json({ message: 'All notifications marked as read' });
   } catch (error) {

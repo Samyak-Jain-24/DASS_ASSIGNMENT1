@@ -93,7 +93,7 @@ const DiscussionForum = ({ eventId }) => {
 
   const fetchNotificationsSilent = async () => {
     try {
-      const response = await getNotifications('true');
+      const response = await getNotifications('true', eventId);
       setNotifications(response.data.notifications);
       setUnreadCount(response.data.unreadCount);
     } catch (error) {
@@ -112,7 +112,7 @@ const DiscussionForum = ({ eventId }) => {
 
   const handleMarkAllRead = async () => {
     try {
-      await markAllNotificationsRead();
+      await markAllNotificationsRead(eventId);
       setUnreadCount(0);
       setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
     } catch (error) {
