@@ -51,8 +51,8 @@ const ParticipantRegister = () => {
       return;
     }
 
-    if (participantType === 'IIIT' && !email.endsWith('@iiit.ac.in')) {
-      toast.error('IIIT participants must use IIIT email');
+    if (participantType === 'IIIT' && !email.endsWith('@students.iiit.ac.in') && !email.endsWith('@research.iiit.ac.in')) {
+      toast.error('IIIT participants must use IIIT email (@students.iiit.ac.in or @research.iiit.ac.in)');
       return;
     }
 
@@ -123,7 +123,7 @@ const ParticipantRegister = () => {
               onChange={handleChange}
               placeholder={
                 participantType === 'IIIT'
-                  ? 'your.email@iiit.ac.in'
+                  ? 'your.email@students.iiit.ac.in'
                   : 'your.email@example.com'
               }
               required

@@ -25,9 +25,9 @@ const registerParticipant = async (req, res) => {
     } = req.body;
 
     // Validate IIIT email for IIIT participants
-    if (participantType === 'IIIT' && !email.endsWith('@iiit.ac.in')) {
+    if (participantType === 'IIIT' && !email.endsWith('@students.iiit.ac.in') && !email.endsWith('@research.iiit.ac.in')) {
       return res.status(400).json({
-        message: 'IIIT participants must use IIIT-issued email ID',
+        message: 'IIIT participants must use IIIT-issued email ID (@students.iiit.ac.in or @research.iiit.ac.in)',
       });
     }
 

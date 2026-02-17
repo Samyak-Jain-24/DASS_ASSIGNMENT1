@@ -5,6 +5,8 @@ A comprehensive event management platform for IIIT's annual fest, built with the
 ## 🎯 Features
 
 ### For Participants
+ADDITIONAL ATTRIBUTE ADDED IS FOLLOWED CLUBS AS IT IMPORTANT TO KNOW WHICH CLUBS A PARTICIPANT FOLLOWS IN ORDER TO FIND TOP 5 EVENTS FOR THAT PARTICULAR PARTICIPANT
+
 - **Registration & Authentication**: Secure signup with email validation (IIIT email required for IIIT students)
 - **Personalized Dashboard**: View upcoming events, participation history, and registrations
 - **Event Browsing**: Search, filter, and browse events with trending recommendations
@@ -13,6 +15,8 @@ A comprehensive event management platform for IIIT's annual fest, built with the
 - **Profile Management**: Update personal information and preferences
 
 ### For Organizers
+ADDITIONAL ATTRIBUTE ADDED IS CONTACT NUMBER AS IT SOMETIMES IN CASE OF URGENCY PARTICIPANT MIGHT NEED TO DIRECTLY CONTACT THE ORGANIZER RATHER THAN WAITING FOR A MAIL TO BE REPLIED BACK
+
 - **Event Creation**: Create normal events or merchandise sales with custom forms
 - **Event Management**: Track registrations, attendance, and revenue analytics
 - **Participant Management**: Export participant data, mark attendance
