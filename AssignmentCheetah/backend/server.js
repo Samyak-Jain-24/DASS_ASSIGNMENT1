@@ -17,6 +17,8 @@ const forumRoutes = require('./routes/forumRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 const calendarRoutes = require('./routes/calendarRoutes');
 
+// ...existing code...
+
 // Initialize app
 const app = express();
 
@@ -24,10 +26,17 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    process.env.FRONTEND_URL
+  ].filter(Boolean),
+  credentials: true
+}));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+// ...existing code...
 // Routes
 app.get('/', (req, res) => {
   res.json({
