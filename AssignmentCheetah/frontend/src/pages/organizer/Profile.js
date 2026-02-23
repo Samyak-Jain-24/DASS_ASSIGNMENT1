@@ -184,16 +184,16 @@ const OrganizerProfile = () => {
               <button
                 onClick={() => setShowResetForm(true)}
                 className="btn btn-secondary"
-                style={{ backgroundColor: '#e67e22', borderColor: '#e67e22', color: 'white' }}
+                style={{ backgroundColor: '#555', borderColor: '#555', color: 'white' }}
               >
                 Request Password Reset
               </button>
             ) : (
               <div style={{
                 padding: '16px',
-                backgroundColor: '#fff3cd',
+                backgroundColor: '#f5f5f5',
                 borderRadius: '8px',
-                border: '1px solid #ffeaa7',
+                border: '1px solid #ddd',
               }}>
                 <div className="form-group">
                   <label style={{ fontWeight: 'bold' }}>Reason for Reset *</label>

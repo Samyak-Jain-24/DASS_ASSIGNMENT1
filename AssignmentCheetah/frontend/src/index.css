@@ -19,12 +19,12 @@ code {
 }
 
 :root {
-  --primary-color: #4a90e2;
-  --secondary-color: #50c878;
-  --danger-color: #e74c3c;
-  --warning-color: #f39c12;
-  --dark-color: #2c3e50;
-  --light-color: #ecf0f1;
+  --primary-color: #333;
+  --secondary-color: #555;
+  --danger-color: #666;
+  --warning-color: #777;
+  --dark-color: #111;
+  --light-color: #f5f5f5;
   --border-radius: 8px;
   --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -51,7 +51,7 @@ code {
 }
 
 .btn-primary:hover {
-  background-color: #3a7bc8;
+  background-color: #222;
 }
 
 .btn-secondary {
@@ -60,7 +60,7 @@ code {
 }
 
 .btn-secondary:hover {
-  background-color: #40a868;
+  background-color: #444;
 }
 
 .btn-danger {
@@ -69,7 +69,7 @@ code {
 }
 
 .btn-danger:hover {
-  background-color: #c0392b;
+  background-color: #555;
 }
 
 .card {
@@ -221,7 +221,7 @@ code {
 }
 
 .participants-table thead {
-  background: var(--primary-color);
+  background: #333;
   color: white;
 }
 
@@ -241,12 +241,12 @@ code {
 }
 
 .btn-warning {
-  background-color: var(--warning-color);
+  background-color: #777;
   color: white;
 }
 
 .btn-warning:hover {
-  background-color: #e08e0b;
+  background-color: #666;
 }
 
 .text-muted {

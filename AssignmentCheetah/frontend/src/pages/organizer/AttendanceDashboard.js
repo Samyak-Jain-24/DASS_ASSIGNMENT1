@@ -176,19 +176,19 @@ const AttendanceDashboard = () => {
 
         {/* Stats */}
         <div className="dashboard-stats">
-          <div className="stat-card" style={{ borderLeft: '4px solid #3498db' }}>
+          <div className="stat-card" style={{ borderLeft: '4px solid #333' }}>
             <h3>{attendanceData?.totalRegistered || 0}</h3>
             <p>Total Registered</p>
           </div>
-          <div className="stat-card" style={{ borderLeft: '4px solid #27ae60' }}>
+          <div className="stat-card" style={{ borderLeft: '4px solid #555' }}>
             <h3>{attendanceData?.totalScanned || 0}</h3>
             <p>Checked In</p>
           </div>
-          <div className="stat-card" style={{ borderLeft: '4px solid #e74c3c' }}>
+          <div className="stat-card" style={{ borderLeft: '4px solid #777' }}>
             <h3>{attendanceData?.totalNotScanned || 0}</h3>
             <p>Not Yet Scanned</p>
           </div>
-          <div className="stat-card" style={{ borderLeft: '4px solid #9b59b6' }}>
+          <div className="stat-card" style={{ borderLeft: '4px solid #999' }}>
             <h3>{attendancePercentage}%</h3>
             <p>Attendance Rate</p>
           </div>
@@ -202,7 +202,7 @@ const AttendanceDashboard = () => {
           </div>
           <div style={{ background: '#e9ecef', borderRadius: '10px', height: '24px', overflow: 'hidden' }}>
             <div style={{
-              background: attendancePercentage >= 75 ? '#27ae60' : attendancePercentage >= 50 ? '#f39c12' : '#3498db',
+              background: '#333',
               height: '100%',
               width: `${attendancePercentage}%`,
               borderRadius: '10px',
@@ -280,7 +280,7 @@ const AttendanceDashboard = () => {
                     (typeof reg.formData === 'object' && reg.formData.manualOverride)
                   );
                   return (
-                    <tr key={reg._id} style={{ background: reg.attended ? '#f0fff0' : 'inherit' }}>
+                    <tr key={reg._id} style={{ background: reg.attended ? '#f0f0f0' : 'inherit' }}>
                       <td>{idx + 1}</td>
                       <td>{reg.participant?.firstName} {reg.participant?.lastName}</td>
                       <td>{reg.participant?.email}</td>
@@ -289,11 +289,11 @@ const AttendanceDashboard = () => {
                       <td style={{ fontFamily: 'monospace', fontSize: '13px' }}>{reg.ticketId}</td>
                       <td>
                         {reg.attended ? (
-                          <span style={{ color: '#27ae60', fontWeight: 'bold' }}>
+                          <span style={{ color: '#333', fontWeight: 'bold' }}>
                             ✅ Attended {isManual && '(Manual)'}
                           </span>
                         ) : (
-                          <span style={{ color: '#e74c3c', fontWeight: 'bold' }}>❌ Not Scanned</span>
+                          <span style={{ color: '#666', fontWeight: 'bold' }}>❌ Not Scanned</span>
                         )}
                       </td>
                       <td style={{ fontSize: '13px' }}>
@@ -328,7 +328,7 @@ const AttendanceDashboard = () => {
               <button className="modal-close" onClick={() => setShowManualModal(false)}>×</button>
             </div>
             <div className="modal-body">
-              <div style={{ background: '#fff3cd', padding: '15px', borderRadius: '6px', marginBottom: '15px', border: '1px solid #ffeaa7' }}>
+              <div style={{ background: '#f5f5f5', padding: '15px', borderRadius: '6px', marginBottom: '15px', border: '1px solid #ddd' }}>
                 <strong>⚠️ Audit Notice:</strong> This manual override will be logged with your ID, the reason, and timestamp for audit purposes.
               </div>
 
@@ -338,7 +338,7 @@ const AttendanceDashboard = () => {
 
               <div style={{ marginTop: '15px' }}>
                 <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>
-                  Reason for Manual Override <span style={{ color: '#e74c3c' }}>*</span>
+                  Reason for Manual Override <span style={{ color: '#333' }}>*</span>
                 </label>
                 <textarea
                   value={overrideReason}

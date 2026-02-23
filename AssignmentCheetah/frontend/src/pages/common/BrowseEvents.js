@@ -133,7 +133,7 @@ const BrowseEvents = () => {
                     <div className="event-type-badge">{event.eventType}</div>
                     {event.isRegistered && (
                       <div className="event-type-badge" style={{ 
-                        backgroundColor: '#28a745', 
+                        backgroundColor: '#555', 
                         position: 'absolute', 
                         top: '50px', 
                         right: '10px' 

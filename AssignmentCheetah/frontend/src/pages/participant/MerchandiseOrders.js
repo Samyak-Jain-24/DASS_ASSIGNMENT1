@@ -33,9 +33,9 @@ const MerchandiseOrders = () => {
 
   const statusColor = (status) => {
     switch (status) {
-      case 'Approved': return '#27ae60';
-      case 'Rejected': return '#e74c3c';
-      default: return '#f39c12';
+      case 'Approved': return '#333';
+      case 'Rejected': return '#666';
+      default: return '#777';
     }
   };
 
@@ -89,7 +89,7 @@ const MerchandiseOrders = () => {
                     </span>
                   </p>
                   {order.paymentStatus === 'Rejected' && order.rejectionReason && (
-                    <p style={{ color: '#e74c3c' }}><strong>Reason:</strong> {order.rejectionReason}</p>
+                    <p style={{ color: '#666' }}><strong>Reason:</strong> {order.rejectionReason}</p>
                   )}
                   {order.ticketId && (
                     <p><strong>Ticket ID:</strong> {order.ticketId}</p>

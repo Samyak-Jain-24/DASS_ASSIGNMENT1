@@ -108,13 +108,13 @@ const EditEvent = () => {
           <h2>Edit Event</h2>
 
           {cannotEdit && (
-            <div style={{ padding: '15px', backgroundColor: '#fff3cd', border: '1px solid #ffc107', borderRadius: '5px', marginBottom: '20px' }}>
+            <div style={{ padding: '15px', backgroundColor: '#f5f5f5', border: '1px solid #ddd', borderRadius: '5px', marginBottom: '20px' }}>
               <strong>⚠️ Editing Restricted:</strong> This event is {originalStatus}. Only status changes are allowed from the event detail page.
             </div>
           )}
 
           {canEditLimited && (
-            <div style={{ padding: '15px', backgroundColor: '#d1ecf1', border: '1px solid #bee5eb', borderRadius: '5px', marginBottom: '20px' }}>
+            <div style={{ padding: '15px', backgroundColor: '#f0f0f0', border: '1px solid #ddd', borderRadius: '5px', marginBottom: '20px' }}>
               <strong>ℹ️ Limited Editing:</strong> This event is Published. You can only edit description, extend deadline, and increase registration limit.
             </div>
           )}
@@ -187,7 +187,7 @@ const EditEvent = () => {
                   disabled={cannotEdit}
                   required={!cannotEdit}
                 />
-                {canEditLimited && <small style={{ color: '#28a745' }}>Can be extended for published events</small>}
+                {canEditLimited && <small style={{ color: '#555' }}>Can be extended for published events</small>}
               </div>
 
               <div className="form-group">
@@ -227,7 +227,7 @@ const EditEvent = () => {
                   disabled={cannotEdit}
                   required={!cannotEdit}
                 />
-                {canEditLimited && <small style={{ color: '#28a745' }}>Can be increased for published events</small>}
+                {canEditLimited && <small style={{ color: '#555' }}>Can be increased for published events</small>}
               </div>
 
               <div className="form-group">
@@ -262,7 +262,7 @@ const EditEvent = () => {
               )}
 
               {cannotEdit && (
-                <div style={{ padding: '15px', backgroundColor: '#f8d7da', border: '1px solid #f5c6cb', borderRadius: '5px', marginTop: '20px' }}>
+                <div style={{ padding: '15px', backgroundColor: '#f0f0f0', border: '1px solid #ddd', borderRadius: '5px', marginTop: '20px' }}>
                   <strong>Editing is disabled for {originalStatus} events.</strong> Go to event detail page to change status.
                 </div>
               )}

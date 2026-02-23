@@ -301,7 +301,7 @@ const EventDetails = () => {
               <span className="event-type-badge">{event.eventType}</span>
               {isRegistered && !hasPendingOrder && (
                 <span className="event-type-badge" style={{ 
-                  backgroundColor: '#28a745', 
+                  backgroundColor: '#555', 
                   marginLeft: '10px' 
                 }}>
                   ✓ Registered
@@ -309,7 +309,7 @@ const EventDetails = () => {
               )}
               {hasPendingOrder && merchandiseOrderStatus === 'Pending Approval' && (
                 <span className="event-type-badge" style={{ 
-                  backgroundColor: '#f39c12', 
+                  backgroundColor: '#777', 
                   marginLeft: '10px' 
                 }}>
                   ⏳ Order Pending Approval
@@ -317,7 +317,7 @@ const EventDetails = () => {
               )}
               {hasPendingOrder && merchandiseOrderStatus === 'Approved' && (
                 <span className="event-type-badge" style={{ 
-                  backgroundColor: '#28a745', 
+                  backgroundColor: '#555', 
                   marginLeft: '10px' 
                 }}>
                   ✓ Order Approved

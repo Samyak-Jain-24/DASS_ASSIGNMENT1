@@ -76,7 +76,7 @@ const OngoingEvents = () => {
                     <h3 style={{ margin: 0 }}>{event.eventName}</h3>
                     <span
                       style={{
-                        background: event.status === 'Ongoing' ? '#27ae60' : '#3498db',
+                        background: event.status === 'Ongoing' ? '#333' : '#555',
                         color: '#fff',
                         padding: '2px 10px',
                         borderRadius: '12px',
@@ -87,7 +87,7 @@ const OngoingEvents = () => {
                     </span>
                     <span
                       style={{
-                        background: event.eventType === 'Merchandise' ? '#9b59b6' : '#95a5a6',
+                        background: event.eventType === 'Merchandise' ? '#555' : '#999',
                         color: '#fff',
                         padding: '2px 10px',
                         borderRadius: '12px',

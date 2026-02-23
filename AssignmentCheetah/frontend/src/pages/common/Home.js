@@ -20,26 +20,6 @@ const Home = () => {
       </header>
 
       <main className="home-main">
-        <section className="hero-section">
-          <div className="hero-content">
-            <h1 className="hero-title">Welcome to Felicity</h1>
-            <p className="hero-subtitle">
-              The Ultimate Event Management Platform for IIIT's Annual Fest
-            </p>
-            <p className="hero-description">
-              Register for events, buy merchandise, and stay updated with all fest activities
-            </p>
-            <div className="hero-buttons">
-              <Link to="/register" className="btn btn-primary btn-lg">
-                Get Started
-              </Link>
-              <Link to="/events" className="btn btn-secondary btn-lg">
-                Browse Events
-              </Link>
-            </div>
-          </div>
-        </section>
-
         <section className="features-section">
           <h2>Why Choose Felicity?</h2>
           <div className="features-grid">

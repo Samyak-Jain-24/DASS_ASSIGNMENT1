@@ -49,7 +49,7 @@ function App() {
         <div className="App">
           <Routes>
             {/* Public routes */}
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<ParticipantRegister />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />

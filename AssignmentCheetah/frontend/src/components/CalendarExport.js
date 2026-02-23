@@ -141,8 +141,8 @@ const CalendarExport = ({ eventId, eventIds = [], eventName = 'event', mode = 's
     return (
       <div
         style={{
-          background: '#f8f9ff',
-          border: '1px solid #e0e4f5',
+          background: '#f5f5f5',
+          border: '1px solid #ddd',
           borderRadius: '10px',
           padding: '16px 20px',
           marginBottom: '20px',
@@ -184,7 +184,7 @@ const CalendarExport = ({ eventId, eventIds = [], eventName = 'event', mode = 's
                 padding: '8px 16px',
                 borderRadius: '6px',
                 border: 'none',
-                background: eventIds.length > 0 ? '#667eea' : '#ccc',
+                background: eventIds.length > 0 ? '#333' : '#ccc',
                 color: '#fff',
                 cursor: eventIds.length > 0 ? 'pointer' : 'not-allowed',
                 fontSize: '13px',
@@ -203,8 +203,8 @@ const CalendarExport = ({ eventId, eventIds = [], eventName = 'event', mode = 's
   return (
     <div
       style={{
-        background: '#f8f9ff',
-        border: '1px solid #e0e4f5',
+        background: '#f5f5f5',
+        border: '1px solid #ddd',
         borderRadius: '10px',
         padding: '20px',
         marginTop: '16px',
@@ -222,7 +222,7 @@ const CalendarExport = ({ eventId, eventIds = [], eventName = 'event', mode = 's
         <h4 style={{ margin: 0, fontSize: '16px', color: '#333' }}>
           📅 Add to Calendar
         </h4>
-        <span style={{ fontSize: '14px', color: '#667eea' }}>
+        <span style={{ fontSize: '14px', color: '#333' }}>
           {showOptions ? '▲ Hide' : '▼ Show Options'}
         </span>
       </div>
@@ -268,7 +268,7 @@ const CalendarExport = ({ eventId, eventIds = [], eventName = 'event', mode = 's
             style={{
               marginBottom: '16px',
               padding: '8px 12px',
-              background: '#eef0ff',
+              background: '#eee',
               borderRadius: '6px',
               fontSize: '13px',
               color: '#555',
@@ -288,8 +288,8 @@ const CalendarExport = ({ eventId, eventIds = [], eventName = 'event', mode = 's
                 minWidth: '140px',
                 padding: '12px 16px',
                 borderRadius: '8px',
-                border: '1px solid #667eea',
-                background: '#667eea',
+                border: '1px solid #333',
+                background: '#333',
                 color: '#fff',
                 cursor: 'pointer',
                 fontSize: '14px',
@@ -313,9 +313,9 @@ const CalendarExport = ({ eventId, eventIds = [], eventName = 'event', mode = 's
                 minWidth: '140px',
                 padding: '12px 16px',
                 borderRadius: '8px',
-                border: '1px solid #4285f4',
+                border: '1px solid #333',
                 background: '#fff',
-                color: '#4285f4',
+                color: '#333',
                 cursor: 'pointer',
                 fontSize: '14px',
                 fontWeight: '600',
@@ -325,10 +325,10 @@ const CalendarExport = ({ eventId, eventIds = [], eventName = 'event', mode = 's
                 gap: '8px',
                 transition: 'background 0.2s',
               }}
-              onMouseOver={(e) => (e.currentTarget.style.background = '#f0f4ff')}
+              onMouseOver={(e) => (e.currentTarget.style.background = '#f5f5f5')}
               onMouseOut={(e) => (e.currentTarget.style.background = '#fff')}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="#4285f4">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#333">
                 <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm5.2 17.8H6.8V6.2h10.4v11.6zM17 7H7v10h10V7zm-2 3H9v1.5h6V10zm0 3H9v1.5h6V13z" />
               </svg>
               Google Calendar
@@ -342,9 +342,9 @@ const CalendarExport = ({ eventId, eventIds = [], eventName = 'event', mode = 's
                 minWidth: '140px',
                 padding: '12px 16px',
                 borderRadius: '8px',
-                border: '1px solid #0078d4',
+                border: '1px solid #555',
                 background: '#fff',
-                color: '#0078d4',
+                color: '#555',
                 cursor: 'pointer',
                 fontSize: '14px',
                 fontWeight: '600',
@@ -354,10 +354,10 @@ const CalendarExport = ({ eventId, eventIds = [], eventName = 'event', mode = 's
                 gap: '8px',
                 transition: 'background 0.2s',
               }}
-              onMouseOver={(e) => (e.currentTarget.style.background = '#f0f7ff')}
+              onMouseOver={(e) => (e.currentTarget.style.background = '#f5f5f5')}
               onMouseOut={(e) => (e.currentTarget.style.background = '#fff')}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="#0078d4">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#555">
                 <path d="M24 7.387v10.478c0 .23-.08.424-.238.576-.16.154-.352.232-.578.232h-8.26v-12.5h8.26c.226 0 .418.08.578.234.158.152.238.344.238.574v.406zM14.924 5.09v14.572l-9.11-1.572V6.91l9.11-1.82zM7.5 13.974c.167.24.39.36.672.36.105 0 .206-.02.3-.057l.002-.002c.282-.116.45-.366.502-.746l.6-4.292c.04-.28-.03-.525-.207-.734-.18-.21-.41-.314-.695-.314-.107 0-.207.02-.3.057-.283.117-.45.366-.503.748l-.6 4.29c-.04.28.03.524.21.732l.02.002zm14.692-8.26H14.4L4.8 4.2v16.4l9.6 1.6h9.6V6.12c0-.226-.078-.418-.234-.578-.156-.158-.348-.238-.574-.238z" />
               </svg>
               Outlook Calendar

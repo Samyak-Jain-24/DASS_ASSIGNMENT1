@@ -231,8 +231,8 @@ const DiscussionForum = ({ eventId }) => {
               style={{
                 padding: '2px 8px',
                 borderRadius: '12px',
-                border: hasReacted ? '2px solid #667eea' : '1px solid #ddd',
-                background: hasReacted ? '#eef0ff' : '#f8f9fa',
+                border: hasReacted ? '2px solid #333' : '1px solid #ddd',
+                background: hasReacted ? '#eee' : '#f8f9fa',
                 cursor: canPost ? 'pointer' : 'default',
                 fontSize: '14px',
                 display: 'flex',
@@ -311,17 +311,17 @@ const DiscussionForum = ({ eventId }) => {
         style={{
           padding: '12px 16px',
           borderLeft: msg.isAnnouncement
-            ? '4px solid #f39c12'
+            ? '4px solid #555'
             : msg.isPinned
-            ? '4px solid #667eea'
+            ? '4px solid #333'
             : '3px solid transparent',
-          backgroundColor: msg.isAnnouncement ? '#fff8e1' : msg.isPinned ? '#f0f2ff' : '#fff',
+          backgroundColor: msg.isAnnouncement ? '#f5f5f5' : msg.isPinned ? '#eee' : '#fff',
           borderRadius: '8px',
           marginBottom: '10px',
           border: msg.isAnnouncement
-            ? '1px solid #f39c12'
+            ? '1px solid #555'
             : msg.isPinned
-            ? '1px solid #c5caf5'
+            ? '1px solid #ccc'
             : '1px solid #eee',
         }}
       >
@@ -335,7 +335,7 @@ const DiscussionForum = ({ eventId }) => {
                   fontSize: '11px',
                   padding: '2px 6px',
                   borderRadius: '4px',
-                  backgroundColor: '#667eea',
+                  backgroundColor: '#333',
                   color: 'white',
                 }}
               >
@@ -349,7 +349,7 @@ const DiscussionForum = ({ eventId }) => {
                   fontSize: '11px',
                   padding: '2px 6px',
                   borderRadius: '4px',
-                  backgroundColor: '#f39c12',
+                  backgroundColor: '#555',
                   color: 'white',
                 }}
               >
@@ -363,7 +363,7 @@ const DiscussionForum = ({ eventId }) => {
                   fontSize: '11px',
                   padding: '2px 6px',
                   borderRadius: '4px',
-                  backgroundColor: '#667eea',
+                  backgroundColor: '#333',
                   color: 'white',
                 }}
               >
@@ -397,7 +397,7 @@ const DiscussionForum = ({ eventId }) => {
                   background: 'transparent',
                   cursor: 'pointer',
                   fontSize: '14px',
-                  color: '#e74c3c',
+                  color: '#666',
                 }}
                 title="Delete"
               >
@@ -418,7 +418,7 @@ const DiscussionForum = ({ eventId }) => {
               style={{
                 border: 'none',
                 background: 'transparent',
-                color: '#667eea',
+                color: '#333',
                 cursor: 'pointer',
                 fontSize: '13px',
                 padding: 0,
@@ -449,7 +449,7 @@ const DiscussionForum = ({ eventId }) => {
           justifyContent: 'space-between',
           alignItems: 'center',
           marginBottom: '20px',
-          borderBottom: '2px solid #667eea',
+          borderBottom: '2px solid #333',
           paddingBottom: '10px',
         }}
       >
@@ -482,7 +482,7 @@ const DiscussionForum = ({ eventId }) => {
                       position: 'absolute',
                       top: '-2px',
                       right: '-4px',
-                      backgroundColor: '#e74c3c',
+                      backgroundColor: '#666',
                       color: 'white',
                       borderRadius: '50%',
                       width: '18px',
@@ -532,7 +532,7 @@ const DiscussionForum = ({ eventId }) => {
                         style={{
                           border: 'none',
                           background: 'transparent',
-                          color: '#667eea',
+                          color: '#333',
                           cursor: 'pointer',
                           fontSize: '12px',
                         }}
@@ -556,7 +556,7 @@ const DiscussionForum = ({ eventId }) => {
                         style={{
                           padding: '10px 16px',
                           borderBottom: '1px solid #f5f5f5',
-                          backgroundColor: notif.isRead ? 'white' : '#f0f4ff',
+                          backgroundColor: notif.isRead ? 'white' : '#f0f0f0',
                           cursor: 'pointer',
                         }}
                       >
@@ -588,7 +588,7 @@ const DiscussionForum = ({ eventId }) => {
       {/* Announcements */}
       {announcements.length > 0 && (
         <div style={{ marginBottom: '20px' }}>
-          <h4 style={{ color: '#f39c12', marginBottom: '10px' }}>📢 Announcements</h4>
+          <h4 style={{ color: '#555', marginBottom: '10px' }}>📢 Announcements</h4>
           {announcements.map((ann) => renderMessageCard(ann))}
         </div>
       )}
@@ -676,7 +676,7 @@ const DiscussionForum = ({ eventId }) => {
         >
           {!isAuthenticated ? (
             <p style={{ margin: 0 }}>
-              <Link to="/login" style={{ color: '#667eea', fontWeight: 'bold' }}>
+              <Link to="/login" style={{ color: '#333', fontWeight: 'bold' }}>
                 Log in
               </Link>{' '}
               and register for this event to participate in the discussion.
@@ -700,9 +700,9 @@ const DiscussionForum = ({ eventId }) => {
           style={{
             marginBottom: '20px',
             padding: '16px',
-            backgroundColor: '#f0f2ff',
+            backgroundColor: '#f0f0f0',
             borderRadius: '8px',
-            border: '1px solid #c5caf5',
+            border: '1px solid #ccc',
           }}
         >
           <div
@@ -713,7 +713,7 @@ const DiscussionForum = ({ eventId }) => {
               marginBottom: '12px',
             }}
           >
-            <h4 style={{ margin: 0, color: '#667eea' }}>Thread</h4>
+            <h4 style={{ margin: 0, color: '#333' }}>Thread</h4>
             <button
               onClick={() => {
                 setActiveThread(null);
@@ -722,7 +722,7 @@ const DiscussionForum = ({ eventId }) => {
               }}
               style={{
                 border: 'none',
-                background: '#667eea',
+                background: '#333',
                 color: 'white',
                 borderRadius: '4px',
                 padding: '4px 12px',
@@ -790,8 +790,8 @@ const DiscussionForum = ({ eventId }) => {
                   style={{
                     padding: '6px 12px',
                     borderRadius: '4px',
-                    border: forumPage === i + 1 ? '2px solid #667eea' : '1px solid #ddd',
-                    background: forumPage === i + 1 ? '#667eea' : 'white',
+                    border: forumPage === i + 1 ? '2px solid #333' : '1px solid #ddd',
+                    background: forumPage === i + 1 ? '#333' : 'white',
                     color: forumPage === i + 1 ? 'white' : '#333',
                     cursor: 'pointer',
                   }}

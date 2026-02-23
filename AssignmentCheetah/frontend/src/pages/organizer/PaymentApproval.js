@@ -85,9 +85,9 @@ const PaymentApproval = () => {
 
   const statusColor = (status) => {
     switch (status) {
-      case 'Approved': return '#27ae60';
-      case 'Rejected': return '#e74c3c';
-      default: return '#f39c12';
+      case 'Approved': return '#333';
+      case 'Rejected': return '#666';
+      default: return '#777';
     }
   };
 
@@ -115,19 +115,19 @@ const PaymentApproval = () => {
 
         {/* Summary Stats */}
         <div className="dashboard-stats">
-          <div className="stat-card" style={{ borderLeft: '4px solid #f39c12' }}>
+          <div className="stat-card" style={{ borderLeft: '4px solid #777' }}>
             <h3>{orders.filter((o) => o.paymentStatus === 'Pending Approval').length}</h3>
             <p>Pending</p>
           </div>
-          <div className="stat-card" style={{ borderLeft: '4px solid #27ae60' }}>
+          <div className="stat-card" style={{ borderLeft: '4px solid #333' }}>
             <h3>{orders.filter((o) => o.paymentStatus === 'Approved').length}</h3>
             <p>Approved</p>
           </div>
-          <div className="stat-card" style={{ borderLeft: '4px solid #e74c3c' }}>
+          <div className="stat-card" style={{ borderLeft: '4px solid #666' }}>
             <h3>{orders.filter((o) => o.paymentStatus === 'Rejected').length}</h3>
             <p>Rejected</p>
           </div>
-          <div className="stat-card" style={{ borderLeft: '4px solid #3498db' }}>
+          <div className="stat-card" style={{ borderLeft: '4px solid #999' }}>
             <h3>₹{orders.filter((o) => o.paymentStatus === 'Approved').reduce((s, o) => s + o.totalAmount, 0)}</h3>
             <p>Revenue</p>
           </div>
@@ -225,7 +225,7 @@ const PaymentApproval = () => {
                       <td style={{ fontSize: '13px', fontFamily: 'monospace' }}>{order.ticketId || '-'}</td>
                     )}
                     {activeTab === 'Rejected' && (
-                      <td style={{ fontSize: '13px', color: '#e74c3c' }}>{order.rejectionReason || '-'}</td>
+                      <td style={{ fontSize: '13px', color: '#666' }}>{order.rejectionReason || '-'}</td>
                     )}
                   </tr>
                 ))}

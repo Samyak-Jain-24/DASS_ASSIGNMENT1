@@ -287,7 +287,7 @@ const QRScanner = () => {
                   transform: 'translate(-50%, -50%)',
                   width: '200px',
                   height: '200px',
-                  border: '3px solid #3498db',
+                  border: '3px solid #333',
                   borderRadius: '12px',
                   pointerEvents: 'none',
                   boxShadow: '0 0 0 3000px rgba(0,0,0,0.3)',
@@ -347,12 +347,12 @@ const QRScanner = () => {
         {/* Scan Result */}
         {scanResult && (
           <div style={{
-            background: scanResult.success ? '#d4edda' : scanResult.duplicate ? '#fff3cd' : '#f8d7da',
-            color: scanResult.success ? '#155724' : scanResult.duplicate ? '#856404' : '#721c24',
+            background: scanResult.success ? '#eee' : scanResult.duplicate ? '#f5f5f5' : '#e0e0e0',
+            color: scanResult.success ? '#111' : scanResult.duplicate ? '#333' : '#222',
             padding: '20px',
             borderRadius: '8px',
             marginBottom: '20px',
-            border: `1px solid ${scanResult.success ? '#c3e6cb' : scanResult.duplicate ? '#ffeaa7' : '#f5c6cb'}`,
+            border: `1px solid ${scanResult.success ? '#ccc' : scanResult.duplicate ? '#ddd' : '#bbb'}`,
           }}>
             <h3 style={{ margin: '0 0 8px 0' }}>
               {scanResult.success ? '✅ Success' : scanResult.duplicate ? '⚠️ Duplicate Scan' : '❌ Error'}
@@ -393,7 +393,7 @@ const QRScanner = () => {
                     alignItems: 'center',
                     padding: '10px',
                     borderBottom: '1px solid #eee',
-                    background: scan.success ? '#f0fff0' : scan.duplicate ? '#fffef0' : '#fff0f0',
+                    background: scan.success ? '#f0f0f0' : scan.duplicate ? '#f5f5f5' : '#e8e8e8',
                   }}
                 >
                   <div>

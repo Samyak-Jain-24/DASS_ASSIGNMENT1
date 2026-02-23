@@ -74,13 +74,13 @@ const PasswordResets = () => {
   const getStatusStyle = (status) => {
     switch (status) {
       case 'Pending':
-        return { backgroundColor: '#f39c12', color: 'white' };
+        return { backgroundColor: '#777', color: 'white' };
       case 'Approved':
-        return { backgroundColor: '#27ae60', color: 'white' };
+        return { backgroundColor: '#333', color: 'white' };
       case 'Rejected':
-        return { backgroundColor: '#e74c3c', color: 'white' };
+        return { backgroundColor: '#666', color: 'white' };
       default:
-        return { backgroundColor: '#95a5a6', color: 'white' };
+        return { backgroundColor: '#999', color: 'white' };
     }
   };
 
@@ -109,8 +109,8 @@ const PasswordResets = () => {
               style={{
                 padding: '8px 20px',
                 borderRadius: '20px',
-                border: activeTab === tab ? '2px solid #667eea' : '1px solid #ddd',
-                backgroundColor: activeTab === tab ? '#667eea' : 'white',
+                border: activeTab === tab ? '2px solid #333' : '1px solid #ddd',
+                backgroundColor: activeTab === tab ? '#333' : 'white',
                 color: activeTab === tab ? 'white' : '#333',
                 cursor: 'pointer',
                 fontWeight: activeTab === tab ? 'bold' : 'normal',
@@ -160,7 +160,7 @@ const PasswordResets = () => {
                           padding: '3px 10px',
                           borderRadius: '12px',
                           fontSize: '12px',
-                          backgroundColor: req.userType === 'organizer' ? '#3498db' : '#9b59b6',
+                          backgroundColor: req.userType === 'organizer' ? '#555' : '#777',
                           color: 'white',
                         }}
                       >
@@ -204,9 +204,9 @@ const PasswordResets = () => {
                       <div style={{
                         margin: '10px 0 0',
                         padding: '10px 14px',
-                        backgroundColor: '#d4edda',
+                        backgroundColor: '#eee',
                         borderRadius: '6px',
-                        border: '1px solid #c3e6cb',
+                        border: '1px solid #ddd',
                       }}>
                         <strong>Generated Password:</strong>{' '}
                         <code style={{ 
@@ -227,7 +227,7 @@ const PasswordResets = () => {
                           style={{
                             marginLeft: '10px',
                             border: 'none',
-                            background: '#27ae60',
+                            background: '#333',
                             color: 'white',
                             padding: '4px 10px',
                             borderRadius: '4px',
@@ -249,8 +249,8 @@ const PasswordResets = () => {
                         disabled={processing === req._id}
                         className="btn btn-secondary btn-sm"
                         style={{
-                          backgroundColor: '#27ae60',
-                          borderColor: '#27ae60',
+                          backgroundColor: '#333',
+                          borderColor: '#333',
                           color: 'white',
                           padding: '8px 16px',
                           opacity: processing === req._id ? 0.7 : 1,

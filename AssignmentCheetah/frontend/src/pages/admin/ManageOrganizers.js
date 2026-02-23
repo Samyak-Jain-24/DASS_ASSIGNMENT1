@@ -130,8 +130,8 @@ const ManageOrganizers = () => {
             width: '90%',
             boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
           }}>
-            <h2 style={{ color: '#2ecc71', marginBottom: '20px' }}>✅ Organizer Created Successfully!</h2>
-            <p style={{ marginBottom: '20px', color: '#e74c3c', fontWeight: 'bold' }}>
+            <h2 style={{ color: '#333', marginBottom: '20px' }}>Organizer Created Successfully!</h2>
+            <p style={{ marginBottom: '20px', color: '#333', fontWeight: 'bold' }}>
               ⚠️ IMPORTANT: Save these credentials now! The password won't be shown again.
             </p>
             <div style={{ backgroundColor: '#f8f9fa', padding: '20px', borderRadius: '5px', marginBottom: '20px' }}>
