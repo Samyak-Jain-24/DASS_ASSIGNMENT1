@@ -71,7 +71,44 @@ const getEvents = async (req, res) => {
 
     let events;
 
-    // Sort by trending (most views in last 24 hours)
+    // Helper: run aggregation pipeline to get top 5 trending events
+    // Trending score = views + 3 * registrationCount (registrations weigh more)
+    const getTrendingEvents = async (matchQuery, limit = 5) => {
+      const pipeline = [
+        { $match: matchQuery },
+        {
+          $addFields: {
+            trendingScore: {
+              $add: [
+                { $ifNull: ['$views', 0] },
+                { $multiply: [3, { $ifNull: ['$registrationCount', 0] }] },
+              ],
+            },
+          },
+        },
+        { $sort: { trendingScore: -1 } },
+        { $limit: limit },
+        {
+          $lookup: {
+            from: 'organizers',
+            localField: 'organizer',
+            foreignField: '_id',
+            as: 'organizer',
+          },
+        },
+        { $unwind: '$organizer' },
+        {
+          $project: {
+            'organizer.password': 0,
+            'organizer.email': 0,
+            trendingScore: 0,
+          },
+        },
+      ];
+      return Event.aggregate(pipeline);
+    };
+
+    // Sort by trending (combined views + registration count)
     // If user is a participant, prioritize events from followed clubs
     if (trending === 'true') {
       if (req.user && req.userRole === 'participant') {
@@ -80,10 +117,7 @@ const getEvents = async (req, res) => {
         if (participant.followedClubs && participant.followedClubs.length > 0) {
           // First, get top events from followed clubs
           const followedQuery = { ...query, organizer: { $in: participant.followedClubs } };
-          const followedEvents = await Event.find(followedQuery)
-            .populate('organizer', 'organizerName category description')
-            .sort({ views: -1 })
-            .limit(5);
+          const followedEvents = await getTrendingEvents(followedQuery, 5);
           
           // If we got less than 5 from followed clubs, fill with other trending events
           if (followedEvents.length < 5) {
@@ -93,10 +127,7 @@ const getEvents = async (req, res) => {
               _id: { $nin: excludeIds },
               organizer: { $nin: participant.followedClubs }
             };
-            const otherEvents = await Event.find(remainingQuery)
-              .populate('organizer', 'organizerName category description')
-              .sort({ views: -1 })
-              .limit(5 - followedEvents.length);
+            const otherEvents = await getTrendingEvents(remainingQuery, 5 - followedEvents.length);
             
             events = [...followedEvents, ...otherEvents];
           } else {
@@ -104,17 +135,11 @@ const getEvents = async (req, res) => {
           }
         } else {
           // No followed clubs, get regular trending
-          events = await Event.find(query)
-            .populate('organizer', 'organizerName category description')
-            .sort({ views: -1 })
-            .limit(5);
+          events = await getTrendingEvents(query, 5);
         }
       } else {
         // Not logged in or not a participant, get regular trending
-        events = await Event.find(query)
-          .populate('organizer', 'organizerName category description')
-          .sort({ views: -1 })
-          .limit(5);
+        events = await getTrendingEvents(query, 5);
       }
     } else {
       // Regular query (not trending)
@@ -136,7 +161,7 @@ const getEvents = async (req, res) => {
       const registeredEventIds = new Set(registrations.map(r => r.event.toString()));
       
       eventsWithRegistrationStatus = events.map(event => {
-        const eventObj = event.toObject();
+        const eventObj = typeof event.toObject === 'function' ? event.toObject() : { ...event };
         eventObj.isRegistered = registeredEventIds.has(event._id.toString());
         return eventObj;
       });
